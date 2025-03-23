@@ -3,16 +3,27 @@ import java.text.DecimalFormat;
 
 public class Mineria {
     static Scanner leer = new Scanner(System.in);
-    static DecimalFormat formato = new DecimalFormat("0.000000");
+    static DecimalFormat formato = new DecimalFormat("0.00000");
 
     public static void main(String[] args) {
+
+        
+        System.out.println("\t\t\t\t\tINSTITUTO TECNOLÓGICO DE CULIACÁN" + 
+                            "\n\t\t\t\t\tIng. En Sistemas Computacionales" +
+                            "\n\nZevada Peñuelas Jose Leonardo" +
+                            "\nSolución de ecuaciones." + 
+                            "\nDe 13:00 a 14:00 horas." +
+                            "\n\n\t\t\t\t\tEste programa ejecuta la solución de problemas" +
+                            "\n\t\t\t\t\tutilizando los procesos lógicos de Solución de sistemas" +
+                            "\n\t\t\t\t\tde Ecuaciones utilizando diversos métodos numéricos." +
+                            "\n");
         
         int orden;
         String pregunta, unidad;
 
-        System.out.print("\nPREGUNTA DEL PROBLEMA: ");
+        System.out.print("\nPregunta del problema: ");
         pregunta = leer.nextLine();
-        System.out.print("ORDEN: ");
+        System.out.print("Ingrese el orden del problema: ");
         orden = leer.nextInt();
         System.out.println();
 
@@ -35,23 +46,23 @@ public class Mineria {
         int opc;
         do {
             System.out.println("\n\t\t\t\t-----------------------------------MENÚ-----------------------------------");
-            System.out.println("1.MÉTODO DE GAUSS-JORDAN \n2.MÉTODO DE GAUSS-SEIDEL \n10.FIN");
+            System.out.println("1.MÉTODO DE GAUSS-JORDAN");
+            System.out.println("2.MÉTODO DE GAUSS-SEIDEL");
+            System.out.println("10.FIN");
             System.out.print("ESCOJA UNA OPCIÓN: ");
             opc = leer.nextInt();
             switch (opc) {
                 case 1:
-                    System.out.println("\n-------------------------------------------------------------------------------------------------------------------------------------------\n");
                     metodoGaussJordan(matrizA, concepto, orden, unidad, pregunta);
                     break;
                 case 2:
-                    System.out.println("\n-------------------------------------------------------------------------------------------------------------------------------------------\n");
                     metodoGaussSeidel(orden, pregunta, concepto, unidad);
                     break;
                 case 10:
                     System.out.println("¡ADIÓS!");
                     break;
                 default:
-                    System.out.println("OPCIÓN INVÁLIDA. ESCOJA OTRA OPCIÓN.");
+                    System.out.println("Opcion invalida, eliga una opcion mostrada en pantalla.");
                 break;
             }
         } while (opc != 10);
@@ -71,6 +82,14 @@ public class Mineria {
         double pivote, ecero, factor;
 
         datos(matrizA, orden);
+        
+        System.out.println("\t\t\t\t\tINSTITUTO TECNOLÓGICO DE CULIACÁN" + 
+                            "\n\t\t\t\t\tIng. En Sistemas Computacionales" +
+                            "\nZevada Peñuelas Jose Leonardo" +
+                            "\nSolución de sistemas de ecuaciones." + 
+                            "\nDe 13:00 a 14:00 horas." + "\nMétodo de Gauss-Jordan" +"\n");
+
+        System.out.print("PREGUNTA: ¿" + pregunta + "?\n");
 
         System.out.println("\nMatriz de Datos:");
         imprimirMatriz(matrizA, orden);
@@ -100,18 +119,7 @@ public class Mineria {
         }
         imprimirMatriz(matrizA, orden);
 
-        System.out.println("\t\t\t\t\tINSTITUTO TECNOLÓGICO DE CULIACÁN" + 
-                            "\n\t\t\t\t\tIng. En Sistemas Computacionales" +
-                            "\n\nZevada Peñuelas Jose Leonardo" +
-                            "\nSolución de ecuaciones." + 
-                            "\nDe 13:00 a 14:00 horas." + "Método de Gauss-Jordan" +
-                            "\n\n\t\t\t\t\tEste programa ejecuta la solución de problemas" +
-                            "\n\t\t\t\t\tutilizando los procesos lógicos de Solución de sistemas" +
-                            "\n\t\t\t\t\tde Ecuaciones utilizando diversos métodos numéricos." +
-                            "\n\n");
-        System.out.print("PREGUNTA: ¿" + pregunta + "?\n");
-
-        System.out.println("\nMatriz identidad:");
+        System.out.println("Matriz identidad:");
         for (int f = 1; f <= orden; f++) {
             matrizA[f][orden+1] = matrizA[f][orden+1] / matrizA[f][f];
             matrizA[f][f] = 1;
@@ -170,16 +178,11 @@ public class Mineria {
 
         System.out.println("\t\t\t\t\tINSTITUTO TECNOLÓGICO DE CULIACÁN" + 
                             "\n\t\t\t\t\tIng. En Sistemas Computacionales" +
-                            "\n\nZevada Peñuelas Jose Leonardo" +
-                            "\nSolucion de ecuaciones." + 
-                            "\nDe 13:00 a 14:00 horas." + "Método de Gauss-Seidel" +
-                            "\n\n\t\t\t\t\tEste programa ejecuta la solución de problemas" +
-                            "\n\t\t\t\t\tutilizando los procesos lógicos de Solución de sistemas" +
-                            "\n\t\t\t\t\tde Ecuaciones utilizando diversos métodos numéricos." +
-                            "\n\n");
-        System.out.print("PREGUNTA: " + pregunta + "\n");
+                            "\nZevada Peñuelas Jose Leonardo" +
+                            "\nSolución de sistemas de ecuaciones." + 
+                            "\nMetodo de Gauss-Seidel" + "\nDe 13:00 a 14:00 horas.\n");
 
-        System.out.println();
+        System.out.print("PREGUNTA: " + pregunta);
         int nc = 0;
         double errorTotal = 0;
 
@@ -222,7 +225,7 @@ public class Mineria {
         if (errorTotal <= error) {
             System.out.println("\nResultados:");
             for (int p = 1; p <= orden; p++) {
-                System.out.printf("%s = %.6f %s = %.0f %s\n", concepto[p], vact[p], unidad, (double) Math.round(vact[p]), unidad);
+                System.out.printf("%s = %.6f %s\n", concepto[p], vact[p], unidad);
             }
         } else {
             System.out.println("El proceso superó el número máximo de cálculos y no encontró la mejor aproximación.");
