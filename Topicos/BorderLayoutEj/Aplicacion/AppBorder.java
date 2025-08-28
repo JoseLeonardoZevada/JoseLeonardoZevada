@@ -8,5 +8,6 @@ public class AppBorder {
         Principal ventana = new Principal("Ejemplo de Border Layout");
         
         ventana.setVisible(true);
+        
     }
 }

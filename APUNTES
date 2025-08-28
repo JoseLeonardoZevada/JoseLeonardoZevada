@@ -1,0 +1,157 @@
+import java.awt.BorderLayout;
+import java.awt.CardLayout;
+import java.awt.Color;
+import java.awt.FlowLayout;
+import java.awt.GridLayout;
+import java.awt.HeadlessException;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JLabel;
+
+public class Principal extends JFrame {
+	private static final long serialVersionUID = 1L;
+	private JPanel jpNorte, jpSur, jpCentro, jpEste, jpOeste, jpWN, jpWC, jpWS;
+	private CardLayout layout = new CardLayout();
+
+	public Principal(String title) throws HeadlessException {
+		super(title);
+		setSize(800, 600);
+		setLocationRelativeTo(null);
+		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		initComponents();
+	}
+	private void initComponents() {
+		jpNorte = new JPanel();
+		jpNorte.setBackground(Color.CYAN);
+		//contenidoNorte();	
+		//AQUI LLAMADA AL METODO QUE CONFIGURA EL CONTENEDOR DEL PANEL
+		/*jpNorte.add(new JLabel("NORTE"));*/ //ETIQUETA ANTERIOR
+		add(jpNorte, BorderLayout.NORTH);
+
+		/*jpOeste = new JPanel(new FlowLayout(FlowLayout.RIGHT,50,10));
+        jpOeste.setBackground(Color.LIGHT_GRAY);
+        contenidoWest();      
+        //AQUI LLAMADA AL METODO QUE CONFIGURA EL CONTENEDOR DEL PANEL
+        /*jpOeste.add(new JLabel("OESTE"));*/ //ETIQUETA ANTERIOR
+		/*add(jpOeste, BorderLayout.WEST); */
+
+		jpOeste = new JPanel(new BorderLayout());
+		jpOeste.setBackground(Color.LIGHT_GRAY);
+		contenidoWest(); 
+		add(jpOeste, BorderLayout.WEST);
+
+		jpCentro = new JPanel(new GridLayout(6,2,10,10));
+		jpCentro.setBackground(Color.WHITE);
+		contenidoCentro() ;        
+		//AQUI LLAMADA AL METODO QUE CONFIGURA EL CONTENEDOR DEL PANEL
+		/*jpCentro.add(new JLabel("CENTRO"));*/ //ETIQUETA ANTERIOR
+		add(jpCentro, BorderLayout.CENTER);
+
+		jpEste = new JPanel();
+		jpEste.setLayout(new BoxLayout(jpEste, BoxLayout.Y_AXIS));
+		/*jpEste.setLayout(new BoxLayout(jpEste, BoxLayout.X_AXIS));*/ //LISTA HORIZONTAL CENTRO
+		jpEste.setBackground(Color.YELLOW);
+		contenidoEste();    
+		//AQUI LLAMADA AL METODO QUE CONFIGURA EL CONTENEDOR DEL PANEL
+		/*jpEste.add(new JLabel("ESTE"));*/ //ETIQUETA ANTERIOR
+		add(jpEste, BorderLayout.EAST);
+
+		jpSur = new JPanel();
+		jpSur.setBackground(Color.GREEN);
+		/*contenidoSur();   */     
+		//AQUI LLAMADA AL METODO QUE CONFIGURA EL CONTENEDOR DEL PANEL
+		/*jpSur.add(new JLabel("SUR"));*/ //ETIQUETA ANTERIOR
+		add(jpSur, BorderLayout.SOUTH);
+	}
+	private void contenidoEste() {
+		jpEste.add(new JLabel("ETIQUETA 1"));
+		jpEste.add(new JLabel("ETIQUETA 2"));
+		jpEste.add(new JLabel("ETIQUETA 3"));
+	}
+	private void contenidoCentro() {
+		jpCentro.add(new JLabel("1"));
+		jpCentro.add(new JLabel("2"));
+		jpCentro.add(new JLabel("3"));
+		jpCentro.add(new JLabel("4"));
+		jpCentro.add(new JLabel("5"));
+		jpCentro.add(new JLabel("6"));
+		jpCentro.add(new JLabel("7")); //	
+	}
+	private void contenidoWest() {
+		/*jpOeste.add(new JLabel("ETIQUETA 1"));
+    	jpOeste.add(new JLabel("ETIQUETA 2"));
+    	jpOeste.add(new JLabel("ETIQUETA 3"));*/
+
+		//ZONA NORTE 
+		jpWN = new JPanel(new FlowLayout(FlowLayout.RIGHT,50,10));
+		jpWN.setBackground(Color.MAGENTA);
+		jpWN.add(new JLabel("ZONA OESTE"));
+		JLabel LblNombre = new JLabel("NOMBRE:");
+		jpWN.add(LblNombre);
+		jpWN.add(new JLabel("TOPICOS"));
+		jpOeste.add(jpWN, BorderLayout.NORTH);
+
+		//ZONA CENTRO 
+		jpWC = new JPanel(layout);
+
+		//CREAR LAS TARJETAS (PANELES)
+		JPanel tarjeta1 = crearTarjeta("VISTA 1", Color.CYAN);
+		JPanel tarjeta2 = crearTarjeta("VISTA 2", Color.PINK);
+		JPanel tarjeta3 = crearTarjeta("VISTA 3", Color.BLUE);
+
+		//AGREGAR LAS TARJETAS AL CONTENEDOR
+		jpWC.add(tarjeta1, "VISTA 1");
+		jpWC.add(tarjeta2, "VISTA 2");
+		jpWC.add(tarjeta3, "VISTA 3");
+
+		jpOeste.add(jpWC, BorderLayout.CENTER);
+
+		//CREAR LOS BOTONES PARA CAMBIAR LA TARJETA
+		jpWS = new JPanel(new FlowLayout());
+		jpWS.setBackground(Color.GRAY);
+		JButton btn1 = new JButton("VISTA 1");
+		JButton btn2 = new JButton("VISTA 2");
+		JButton btn3 = new JButton("VISTA 3");
+
+		btn1.addActionListener(new ActionListener() {
+
+			public void actionPerformed(ActionEvent e) {
+				layout.show(jpWC, "VISTA1");
+			}
+		});
+		btn2.addActionListener(new ActionListener() {
+
+			public void actionPerformed(ActionEvent e) {
+				layout.show(jpWC, "VISTA2");
+			}
+		});
+		btn3.addActionListener(new ActionListener() {
+
+			public void actionPerformed(ActionEvent e) {
+				layout.show(jpWC, "VISTA3");
+			}
+		});
+		jpWS.add(btn1);
+		jpWS.add(btn2);
+		jpWS.add(btn3);
+
+		jpOeste.add(jpWS, BorderLayout.SOUTH);
+	}
+	private JPanel crearTarjeta(String texto, Color color) {
+		JPanel panel = new JPanel();
+		panel.setBackground(color);
+		panel.add(new JLabel(texto));
+		return panel;
+	}
+	/*private void contenidoSur() {
+    	jpSur.add(new JLabel("ZONA OESTE"));
+    	JLabel LblNombre = new JLabel("NOMBRE:");
+    	jpSur.add(LblNombre);
+    	jpSur.add(new JLabel("TOPICOS"));
+    }*/
+}

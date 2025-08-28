@@ -6,6 +6,7 @@ import javax.swing.*;
 public class Principal extends JFrame {
     private static final long serialVersionUID = 1L;
     private JPanel jpNorth, jpSouth, jpEast, jpWest, jpCenter;
+    private CardLayout layout = new CardLayout();
  
     public Principal(String str) throws HeadlessException {
         super(str);
@@ -27,11 +28,12 @@ public class Principal extends JFrame {
         add(jpSouth, BorderLayout.SOUTH);
  
         jpEast = new JPanel();
+        jpEast.setLayout(new BoxLayout(jpEast, BoxLayout.Y_AXIS));
         jpEast.setBackground(Color.decode("#9cece2"));
         ContentEast();
         add(jpEast, BorderLayout.EAST);
  
-        jpWest = new JPanel(new FlowLayout(FlowLayout.RIGHT, 50, 10));
+        jpWest = new JPanel(new BorderLayout());
         jpWest.setBackground(Color.decode("#daa7e2"));
         ContentWest();
         add(jpWest, BorderLayout.WEST);
@@ -43,9 +45,41 @@ public class Principal extends JFrame {
     }
  
     private void ContentWest() {
-        jpWest.add(new JLabel("West"));
-        jpWest.add(new JLabel("Nombre: "));
+        jpWest = new JPanel(new FlowLayout(FlowLayout.RIGHT,50,10));
+        jpWest.setBackground(Color.MAGENTA);
+        jpWest.add(new JLabel("Zona oeste"));
+        JLabel LblNombre = new JLabel("Nombre: ");
+        jpWest.add(LblNombre);
         jpWest.add(new JLabel("Topicos"));
+        jpWest.add(jpWest,BorderLayout.NORTH);
+
+        //Zona Centro
+        jpWest = new JPanel(layout);
+
+        // Crear las trajetas paneles
+
+        JPanel tarjeta1 = crearTarjeta("Vista 1", Color.CYAN);
+        JPanel tarjeta2 = crearTarjeta("Vista 2", Color.PINK);
+        JPanel tarjeta3 = crearTarjeta("Vista 3", Color.BLUE);
+
+        // AGREGAR LAS TARJETAS AL CONTENEDOR
+
+        jpWest.add(tarjeta1, "Vista 1");
+        jpWest.add(tarjeta2, "Vista 2");
+        jpWest.add(tarjeta3, "Vista 3");
+
+        jpWest.add(jpWest, BorderLayout.CENTER);
+
+        //Crear los botones para cambiar la tarjeta
+
+        jpWest = new JPanel (new FlowLayout());
+        jpWest.setBackground(Color.GRAY);
+        JButton btn1 = new JButton ("Vista 1");
+        JButton btn2 = new JButton ("Vista 2");
+        JButton btn3 = new JButton ("Vista 3");
+
+        
+
     }
  
     private void ContentCenter() {
@@ -64,4 +98,15 @@ public class Principal extends JFrame {
         jpEast.add(new JLabel("Etiqueta 3"));
         
     }
+
+    private JPanel crearTarjeta(String texto, Color color) {
+
+        JPanel panel = new JPanel();
+        panel.setBackground(color);
+        panel.add(new JLabel(texto));
+        return panel;
+
+    }
+
+
 }
