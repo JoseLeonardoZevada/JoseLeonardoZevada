@@ -4,6 +4,7 @@ import java.awt.*;
 import javax.swing.*;
  
 public class Principal extends JFrame {
+
     private static final long serialVersionUID = 1L;
     private JPanel jpNorth, jpSouth, jpEast, jpWest, jpCenter;
     private CardLayout layout = new CardLayout();
@@ -16,8 +17,8 @@ public class Principal extends JFrame {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         InitComponent();
     }
- 
     private void InitComponent() {
+        
         jpNorth = new JPanel();
         //jpNorth.setBackground(Color.decode("#e7df72ff"));
         jpNorth.setBackground(Color.decode("#e7df72"));
