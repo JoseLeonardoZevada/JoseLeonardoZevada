@@ -1,9 +1,6 @@
-package GUILayer;
+package BorderLayoutEj.ProyectoSecundario.GUILayer2;
 
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
 import javax.swing.*;
 
 public class PrincipalSecundario extends JFrame {
@@ -102,17 +99,6 @@ public class PrincipalSecundario extends JFrame {
         panelCentral.add(botonRegistro, diseñoGBC);
 
         add(panelCentral, BorderLayout.CENTER);
-
-        register.addActionListener (new ActionListener() {
-
-            if(nombre.getText().isEmpty() || )
-
-        
-        public void actionPerformed (ActionEvent e) {
-            
-        }
-        })
-
     
 
     }
